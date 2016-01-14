@@ -141,6 +141,8 @@ string Lista::iteracja(int nr)
 		}
 	}
 }
+
+
 Lista::Lista() {
 	pierwszy = NULL;       // konstruktor
 }
@@ -150,10 +152,10 @@ int main()
 	Lista * baza = new Lista();
 	
 	baza->dodaj_osobe("alody1");
-	baza->dodaj_osobe("jlody2");
+	baza->dodaj_osobe("klody2");
 	baza->dodaj_osobe("clody3");
 	baza->dodaj_osobe("zlody3");
-	baza->dodaj_osobe("dlody3");
+	baza->dodaj_osobe("blody3");
 	//cout << baza->iteracja(3) << endl;
 	/*baza->usun_osobe(3);
 	baza->iteracja(3);
@@ -161,29 +163,39 @@ int main()
 
 	
 	string lol1;
-	string lol2;
+	string lol2, temp;
 	bool sort = false;
+	int max_i = 1;
 
-	while (!sort)
+
+
+	for (int j = 5; j > 0;j--)
 	{
+		
+		max_i = 1;
 		sort = true;
-		for (int i = 1; i < 5; i++)
+
+		for (int i = 1; i < j; i++)
 		{
-			lol1 = baza->iteracja(i);
-			lol2 = baza->iteracja(i + 1);
-
-
-
-			if ((lol1.compare(lol2)) == -1)
+			lol1 = baza->iteracja(max_i);
+			lol2 = baza->iteracja(i+1);
+			if (lol1.compare(lol2) == 1)
 			{
-				sort = false;
+				max_i = i + 1;
 			}
-			else
-			{
-				cout << "not ok" << endl;
-			}
+		
 		}
+
+		//cout << max_i << endl;
+		
+		temp = baza->iteracja(max_i);
+		baza->usun_osobe(max_i);
+		baza->dodaj_osobe(temp);
+
+		
 	}
+	baza->wyswietl_liste();
+
 	system("PAUSE");
 	return 0;
 }
